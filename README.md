@@ -1,0 +1,2 @@
+# phone-parser
+Parses blocks of text to find phone numbers, including phonetic numbers
