@@ -1,1 +1,1 @@
-require 'phone-parser/base'
+require_relative './phone_parser/base'
