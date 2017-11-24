@@ -1,0 +1,40 @@
+AllCops:
+  TargetRubyVersion: 2.3
+  Exclude:
+    - 'spam_parser.gemspec'
+    - 'spec/data/**/*'
+
+ClassLength:
+  Enabled: false
+
+CyclomaticComplexity:
+  Enabled: false
+
+Documentation:
+  Enabled: false
+
+Metrics/AbcSize:
+  Enabled: false
+
+Lint/AssignmentInCondition:
+  Enabled: false
+
+Style/ParenthesesAroundCondition:
+  Enabled: false
+
+Style/DoubleNegation:
+  Enabled: false
+
+Style/ConditionalAssignment:
+  Enabled: false
+
+LineLength:
+  Max: 120
+
+BlockLength:
+  Exclude:
+    - 'spec/**/*'
+
+MethodLength:
+  CountComments: false
+  Max: 100
