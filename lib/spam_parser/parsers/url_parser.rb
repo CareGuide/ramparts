@@ -2,9 +2,9 @@
 
 # Parses text and attempts to find urls
 class UrlParser
-  def find_url_instances(block)
+  def count_url_instances(block)
     block = parse_url(block)
-    instances = block.enum_for(:scan, BAD_URL_REGEX).map { [Regexp.last_match.begin(0), Regexp.last_match.to_s] }
+    instances = block.enum_for(:scan, BAD_URL_REGEX).map { [Regexp.last_match.begin(0), Regexp.last_match.to_s.strip] }
     instances
   end
 

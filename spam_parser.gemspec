@@ -1,6 +1,6 @@
 # -*- encoding: utf-8 -*-
 $:.push File.expand_path('../lib', __FILE__)
-require 'spam-parser/version'
+require 'spam_parser/version'
 
 Gem::Specification.new do |s|
   s.name        = 'spam_parser'
@@ -12,11 +12,11 @@ Gem::Specification.new do |s|
   s.summary     = %q{Parses blocks of text to find phone numbers (including phonetic numbers), emails, and bad url}
   s.description = %q{Parses blocks of text to find phone numbers (including phonetic numbers), emails, and bad url. Useful for finding scammers who tend to try to post their phone number in messages.}
 
-  s.add_development_dependency 'rspec', '~>2.5.0'
+  s.add_development_dependency 'rspec', '~> 2.5', '>= 2.5.0'
   s.add_development_dependency 'rubocop', '~>0.51.0'
 
-  s.files         = `git ls-files`.split('\n')
-  s.test_files    = `git ls-files -- {test,spec,features}/*`.split('\n')
+  s.files         = `git ls-files`.split("\n")
+  s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
   s.executables   = `git ls-files -- bin/*`.split('\n').map{ |f| File.basename(f) }
   s.require_paths = ['lib']
 end
