@@ -11,50 +11,54 @@ class PhoneParser
       parsed_block
       .enum_for(:scan, ALLOWABLE_REGEX)
       .map { [Regexp.last_match.begin(0), Regexp.last_match.to_s] }
-    instances
+    instances.length
   end
 
   def replace_phone_number_instances(block, insertable, options)
-    # ToDo: Build out
+    instances = find_phone_number_instances(block, options)
+    instances.map do |(start_offset, text)|
+      block[start_offset...start_offset + text.size] = insertable
+    end
+    block
   end
 
-  def find_phone_number_instances(block, options)
+  def find_phone_number_instances(block, _options)
     instances =
-        block
-            .downcase
-            .enum_for(:scan, ALLOWABLE_REGEX_ONLY)
-            .map { [Regexp.last_match.begin(0), Regexp.last_match.to_s.strip] }
+      block
+      .downcase
+      .enum_for(:scan, ALLOWABLE_REGEX_ONLY)
+      .map { [Regexp.last_match.begin(0), Regexp.last_match.to_s.strip] }
     instances
   end
 
   private
 
-  PHONETICS = [
-      "one",
-      "two",
-      "three",
-      "four",
-      "five",
-      "six",
-      "seven",
-      "eight",
-      "nine",
-      "oh",
-      "zero"
-  ]
+  PHONETICS = %w[
+    one
+    two
+    three
+    four
+    five
+    six
+    seven
+    eight
+    nine
+    oh
+    zero
+  ].freeze
 
-  LEET_SPEAK = [
-    "w0n",
-    "too",
-    "thr33",
-    "f0r",
-    "f1v3",
-    "s3x",
-    "sex",
-    "s3v3n",
-    "at3",
-    "nin3"
-  ]
+  LEET_SPEAK = %w[
+    w0n
+    too
+    thr33
+    f0r
+    f1v3
+    s3x
+    sex
+    s3v3n
+    at3
+    nin3
+  ].freeze
 
   MULTI_SPACE = '( )*'
   REGEX_PHONETICS = PHONETICS.join('|')
@@ -64,7 +68,8 @@ class PhoneParser
   REGEX_LEET_SPEAK_SPACED = LEET_SPEAK.map { |word| word.split('').join(MULTI_SPACE) }.join('|')
   BASE_MATCHING = "#{REGEX_PHONETICS}|#{REGEX_LEET_SPEAK}|#{REGEX_PHONETICS_SPACED}|#{REGEX_LEET_SPEAK_SPACED}"
 
-  ALLOWABLE_REGEX_ONLY = Regexp.new(/(\()?(\d|#{BASE_MATCHING}){1}([^\w]*(\d|#{BASE_MATCHING}){1}[^\w]*){5,}(\d|#{BASE_MATCHING}){1}/)
+  ALLOWABLE_REGEX_ONLY =
+    Regexp.new(/(\()?(\d|#{BASE_MATCHING}){1}([^\w]*(\d|#{BASE_MATCHING}){1}[^\w]*){5,}(\d|#{BASE_MATCHING}){1}/)
   ALLOWABLE_REGEX = Regexp.new(/(\-*\.?\d{1}\.?\-*){7,}/)
 
   REPLACEMENTS = {

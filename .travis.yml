@@ -1,0 +1,8 @@
+language: ruby
+rvm: 2.3.3
+cache:
+  bundler: true
+
+script:
+  - rubocop
+  - rspec ./spec/

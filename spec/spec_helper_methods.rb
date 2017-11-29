@@ -1,0 +1,63 @@
+# frozen_string_literal: true
+
+require './lib/spam_parser'
+
+def time_method(method, *args)
+  beginning_time = Time.now
+  SpamParser.send(method, args[0])
+  end_time = Time.now
+  milliseconds = (end_time - beginning_time) * 1000
+  milliseconds
+end
+
+def compare_run_times(iterator, method1, method2)
+  total_time_map_reduce = 0
+  total_time_regex = 0
+
+  iterator.each do |block|
+    map_reduce_time = time_method(method1, block[1])
+    regex_time = time_method(method2, block[1])
+
+    total_time_map_reduce += map_reduce_time
+    total_time_regex += regex_time
+  end
+
+  puts
+  puts "Map Reduce Total Time: #{total_time_map_reduce.round(2)} milliseconds"
+  puts "Regex Total Time: #{total_time_regex.round(2)} milliseconds"
+end
+
+def test_truthy_count(iterator, method, options = {})
+  iterator.each do |block|
+    matches = SpamParser.send(method, block[1], options)
+    expect(matches)
+      .to eq(block[0].length),
+          "Expected #{block[0].length}, got #{matches} for '#{block[1]}'"
+  end
+end
+
+def test_truthy_finds(iterator, method, options = {})
+  iterator.each do |block|
+    matches = SpamParser.send(method, block[1], options)
+    block[0].each_with_index do |match_string, index|
+      if matches[index].nil? || matches[index][1].casecmp(match_string) != 0
+        got_result = matches[index].nil? ? 'NIL' : matches[index][1]
+        raise "Expected: #{match_string}\nGot: #{got_result}\nBlock '#{block[1]}'\nResult: #{matches}"
+      end
+    end
+  end
+end
+
+def test_falsy_count(iterator, method, options = {})
+  iterator.each do |block|
+    matches = SpamParser.send(method, block, options)
+    expect(matches).to eq(0), "Expected empty array, got #{matches} for '#{block}'"
+  end
+end
+
+def test_falsy_finds(iterator, method, options = {})
+  iterator.each do |block|
+    matches = SpamParser.send(method, block, options)
+    expect(matches.length).to eq(0), "Expected empty array, got #{matches.length} for '#{block}'"
+  end
+end
