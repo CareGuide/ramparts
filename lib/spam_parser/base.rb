@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require 'pry'
 require_relative './parsers/email_parser'
 require_relative './parsers/phone_parser'
 require_relative './parsers/url_parser'

@@ -1,8 +1,8 @@
 language: ruby
-rvm: 2.3.3
+rvm: 2.3.4
 cache:
   bundler: true
 
 script:
-  - rubocop
-  - rspec ./spec/
+  - git diff --diff-filter=ACMRTUXB --name-only origin/master... | grep -E '\.rb$' | xargs --no-run-if-empty bundle exec rubocop
+  - bundle exec rspec ./spec/

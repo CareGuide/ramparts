@@ -18,10 +18,10 @@ Some things that will increase the chance that your pull request is accepted:
 
 # Stale issue and pull request policy
 
-Issues and pull requests have a shelf life and sometimes they are no longer relevant. All issues and pull requests that have not had any activity for 90 days will be marked as `stale`. Simply leave a comment with information about why it may still be relevant to keep it open. If no activity occurs in the next 7 days, it will be closed. (See [Roadmap](https://github.com/CareGuide/spam-parser/ROADMAP.md) for automatic implementation)
+Issues and pull requests have a shelf life and sometimes they are no longer relevant. All issues and pull requests that have not had any activity for 90 days will be marked as `stale`. Simply leave a comment with information about why it may still be relevant to keep it open. If no activity occurs in the next 7 days, it will be closed. (See [Roadmap](https://github.com/CareGuide/spam-parser/blob/master/ROADMAP.md) for automatic implementation)
 
 The goal of this process is to keep the list of open issues and pull requests focused on work that is actionable and important for the maintainers and the community.
 
 # Pull Request Reviews & releasing
 
-Once pull request has been given approval, leadership will realease and deploy the gem (See [Roadmap]((https://github.com/CareGuide/spam-parser/ROADMAP.md)) for automatic deploys)
+Once pull request has been given approval, leadership will realease and deploy the gem (See [Roadmap](https://github.com/CareGuide/spam-parser/blob/master/ROADMAP.md)) for automatic deploys)
