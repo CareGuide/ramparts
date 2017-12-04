@@ -1,20 +1,22 @@
 # frozen_string_literal: true
 
+require_relative '../helpers'
+
 # Parses text and attempts to locate phone numbers
 class PhoneParser
   def count_phone_number_instances(block, options)
+    raise ArgumentError, ARGUMENT_ERROR_TEXT unless block.is_a? String
+
     # Parses the string and returns a string of hyphens (-) and digits
     parsed_block = parse_phone_number(block, options)
 
     # Returns the starting index and the length of the matched instance for every instance
-    instances =
-      parsed_block
-      .enum_for(:scan, ALLOWABLE_REGEX)
-      .map { [Regexp.last_match.begin(0), Regexp.last_match.to_s] }
-    instances.length
+    return phone_number_instances("MR", parsed_block, options).length
   end
 
   def replace_phone_number_instances(block, insertable, options)
+    raise ArgumentError, ARGUMENT_ERROR_TEXT unless block.is_a? String
+
     instances = find_phone_number_instances(block, options)
     instances.map do |(start_offset, text)|
       block[start_offset...start_offset + text.size] = insertable
@@ -23,12 +25,10 @@ class PhoneParser
   end
 
   def find_phone_number_instances(block, _options)
-    instances =
-      block
-      .downcase
-      .enum_for(:scan, ALLOWABLE_REGEX_ONLY)
-      .map { [Regexp.last_match.begin(0), Regexp.last_match.to_s.strip] }
-    instances
+    raise ArgumentError, ARGUMENT_ERROR_TEXT unless block.is_a? String
+
+    block = block.downcase
+    return phone_number_instances("GR", block, _options)
   end
 
   private
@@ -68,9 +68,9 @@ class PhoneParser
   REGEX_LEET_SPEAK_SPACED = LEET_SPEAK.map { |word| word.split('').join(MULTI_SPACE) }.join('|')
   BASE_MATCHING = "#{REGEX_PHONETICS}|#{REGEX_LEET_SPEAK}|#{REGEX_PHONETICS_SPACED}|#{REGEX_LEET_SPEAK_SPACED}"
 
-  ALLOWABLE_REGEX_ONLY =
+  GR_REGEX =
     Regexp.new(/(\()?(\d|#{BASE_MATCHING}){1}([^\w]*(\d|#{BASE_MATCHING}){1}[^\w]*){5,}(\d|#{BASE_MATCHING}){1}/)
-  ALLOWABLE_REGEX = Regexp.new(/(\-*\.?\d{1}\.?\-*){7,}/)
+  MR_REGEX = Regexp.new(/(\-*\.?\d{1}\.?\-*){7,}/)
 
   REPLACEMENTS = {
     'one' => '1',
@@ -102,12 +102,24 @@ class PhoneParser
   def parse_phone_number(block, options)
     block = block.delete(' ') if options.fetch(:remove_spaces, false)
 
-    block = block.downcase.gsub(/one|two|three|four|five|six|seven|eight|nine|oh|zero/, REPLACEMENTS)
+    block = block.downcase.gsub(/#{REGEX_PHONETICS}/, REPLACEMENTS)
 
     if options.fetch(:parse_leet, false)
-      block = block.gsub(/w0n|too|thr33|f0r|f1v3|s3x|sex|s3v3n|at3|nin3/, LEET_REPLACEMENTS)
+      block = block.gsub(/#{REGEX_LEET_SPEAK}/, LEET_REPLACEMENTS)
     end
 
-    block.gsub(/[^\w]/, '-').gsub(/[a-zA-Z]/, '.')
+    block.gsub(/[^\w]/, '-').gsub(/[a-z]/, '.')
+  end
+
+  def phone_number_instances(algo, block, options)
+    # Determines which algorithm to use
+    regex = algo == "MR" ? MR_REGEX : GR_REGEX
+
+    # Returns the starting index and the length of the matched instance for every instance
+    instances =
+      block
+        .enum_for(:scan, regex)
+        .map { [Regexp.last_match.begin(0), Regexp.last_match.to_s] }
+    instances
   end
 end
