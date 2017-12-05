@@ -10,7 +10,7 @@ class SpamParser
     pp.count_phone_number_instances(block, options)
   end
 
-  def self.replace_phone_numbers(block, insertable = 'cool', options = {})
+  def self.replace_phone_numbers(block, insertable, options = {})
     pp = PhoneParser.new
     pp.replace_phone_number_instances(block, insertable, options)
   end
@@ -25,7 +25,7 @@ class SpamParser
     ep.count_email_instances(block, options)
   end
 
-  def self.replace_emails(block, insertable = 'hippy', options = {})
+  def self.replace_emails(block, insertable, options = {})
     ep = EmailParser.new
     ep.replace_email_instances(block, insertable, options)
   end

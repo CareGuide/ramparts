@@ -4,6 +4,7 @@ require_relative '../helpers'
 
 # Parses text and attempts to locate phone numbers
 class PhoneParser
+  # Counts the number of phone number instances that occur within the block of text
   def count_phone_number_instances(block, options)
     raise ArgumentError, ARGUMENT_ERROR_TEXT unless block.is_a? String
 
@@ -11,28 +12,38 @@ class PhoneParser
     parsed_block = parse_phone_number(block, options)
 
     # Returns the starting index and the length of the matched instance for every instance
+    # Uses the Map Reduce algorithm
     phone_number_instances(MR_ALGO, parsed_block, options).length
   end
 
+  # Replaces phone number instances within the block of text with the insertable
   def replace_phone_number_instances(block, insertable, options)
     raise ArgumentError, ARGUMENT_ERROR_TEXT unless block.is_a? String
 
+    # Finds the phone number instances within the text
     instances = find_phone_number_instances(block, options)
+
+    # Replaces those instances with the insertable
     instances.map do |(start_offset, text)|
       block[start_offset...start_offset + text.size] = insertable
     end
+
+    # Returns the amended block of text
     block
   end
 
+  #
   def find_phone_number_instances(block, options)
     raise ArgumentError, ARGUMENT_ERROR_TEXT unless block.is_a? String
 
+    # Finds the phone number instances using a glorified regex
     block = block.downcase
     phone_number_instances(GR_ALGO, block, options)
   end
 
   private
 
+  # Phonetic versions of numbers
   PHONETICS = %w[
     one
     two
@@ -47,6 +58,7 @@ class PhoneParser
     zero
   ].freeze
 
+  # L33t speak versions of numbers
   LEET_SPEAK = %w[
     w0n
     too
@@ -60,18 +72,28 @@ class PhoneParser
     nin3
   ].freeze
 
+  # Handles multiple spaces
   MULTI_SPACE = '( )*'
+
+  # Regex for phonetics, both with spaces and otherwise
   REGEX_PHONETICS = PHONETICS.join('|')
   REGEX_PHONETICS_SPACED = PHONETICS.map { |word| word.split('').join(MULTI_SPACE) }.join('|')
 
+  # Regex for l33t, both with spaces and otherwise
   REGEX_LEET_SPEAK = LEET_SPEAK.join('|')
   REGEX_LEET_SPEAK_SPACED = LEET_SPEAK.map { |word| word.split('').join(MULTI_SPACE) }.join('|')
+
+  # Base matching for a possible phone number digit
   BASE_MATCHING = "#{REGEX_PHONETICS}|#{REGEX_LEET_SPEAK}|#{REGEX_PHONETICS_SPACED}|#{REGEX_LEET_SPEAK_SPACED}"
 
+  # The final regex used to match phone numbers for GR
   GR_REGEX =
     Regexp.new(/(\()?(\d|#{BASE_MATCHING}){1}([^\w]*(\d|#{BASE_MATCHING}){1}[^\w]*){5,}(\d|#{BASE_MATCHING}){1}/)
+
+  # The final regex used to match phone numbers for MR
   MR_REGEX = Regexp.new(/(\-*\.?\d{1}\.?\-*){7,}/)
 
+  # Replacements used for phonetics for MR
   REPLACEMENTS = {
     'one' => '1',
     'two' => '2',
@@ -86,6 +108,7 @@ class PhoneParser
     'zero' => '0'
   }.freeze
 
+  # Replacements used for l33t for MR
   LEET_REPLACEMENTS = {
     'w0n' => '1',
     'too' => '2',
@@ -99,6 +122,7 @@ class PhoneParser
     'nin3' => '9'
   }.freeze
 
+  # Parses the phone number for MR, uses a variety of options
   def parse_phone_number(block, options)
     block = block.delete(' ') if options.fetch(:remove_spaces, false)
 
@@ -111,6 +135,7 @@ class PhoneParser
     block.gsub(/[^\w]/, '-').gsub(/[a-z]/, '.')
   end
 
+  # Returns the phone number instances using the specified algorithm
   def phone_number_instances(algo, block, _options)
     # Determines which algorithm to use
     regex = algo == MR_ALGO ? MR_REGEX : GR_REGEX

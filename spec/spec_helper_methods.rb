@@ -2,6 +2,7 @@
 
 require './lib/spam_parser'
 
+# Times a method run length in milliseconds
 def time_method(method, *args)
   beginning_time = Time.now
   SpamParser.send(method, args[0])
@@ -10,6 +11,8 @@ def time_method(method, *args)
   milliseconds
 end
 
+# Compares the run time of two methods
+# In this case the MR and GR algos
 def compare_run_times(iterator, method1, method2)
   total_time_map_reduce = 0
   total_time_regex = 0
@@ -27,6 +30,7 @@ def compare_run_times(iterator, method1, method2)
   puts "Regex Total Time: #{total_time_regex.round(2)} milliseconds"
 end
 
+# Test helper for testing truthy values against count type methods
 def test_truthy_count(iterator, method, options = {})
   iterator.each do |block|
     matches = SpamParser.send(method, block[1], options)
@@ -36,6 +40,7 @@ def test_truthy_count(iterator, method, options = {})
   end
 end
 
+# Test helper for testing truthy values against find type methods
 def test_truthy_finds(iterator, method, options = {})
   iterator.each do |block|
     matches = SpamParser.send(method, block[1], options)
@@ -48,6 +53,7 @@ def test_truthy_finds(iterator, method, options = {})
   end
 end
 
+# Test helper for testing falsy values against count type methods
 def test_falsy_count(iterator, method, options = {})
   iterator.each do |block|
     matches = SpamParser.send(method, block, options)
@@ -55,6 +61,7 @@ def test_falsy_count(iterator, method, options = {})
   end
 end
 
+# Test helper for testing falsy values against find type methods
 def test_falsy_finds(iterator, method, options = {})
   iterator.each do |block|
     matches = SpamParser.send(method, block, options)
