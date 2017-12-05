@@ -12,7 +12,7 @@ class EmailParser
 
     # Maps the block down to a simpler form and then finds the instances
     block = parse_email(block)
-    return email_instances("MR", block, options).length
+    email_instances(MR_ALGO, block, options).length
   end
 
   # Replaces the occurrences of email within the block of text with an insertable
@@ -35,7 +35,7 @@ class EmailParser
 
     # Finds the occurrences of emails within the block
     block = block.downcase
-    return email_instances("GR", block, options)
+    email_instances(GR_ALGO, block, options)
   end
 
   private
@@ -71,16 +71,16 @@ class EmailParser
 
   def email_instances(algo, block, options)
     # Determines which algorithm to use
-    regex = algo == "MR" ? MR_REGEX : GR_REGEX
-    regex_without_dot = algo == "MR" ? MR_REGEX_WITHOUT_DOT : GR_REGEX_WITHOUT_DOT
+    regex = algo == MR_ALGO ? MR_REGEX : GR_REGEX
+    regex_without_dot = algo == MR_ALGO ? MR_REGEX_WITHOUT_DOT : GR_REGEX_WITHOUT_DOT
 
     instances = []
     if options.fetch(:aggressive, false)
       # Finds the occurrences using the correct regex
       temp_instances =
         block
-          .enum_for(:scan, regex_without_dot)
-          .map { [Regexp.last_match.begin(0), Regexp.last_match.to_s.strip] }
+        .enum_for(:scan, regex_without_dot)
+        .map { [Regexp.last_match.begin(0), Regexp.last_match.to_s.strip] }
 
       # Since this is the aggressive option where '.com' or similar isn't needed
       # Check to make sure the last word of the string is a domain
@@ -91,8 +91,8 @@ class EmailParser
       # Finds the occurrences using the correct regex
       instances =
         block
-          .enum_for(:scan, regex)
-          .map { [Regexp.last_match.begin(0), Regexp.last_match.to_s.strip] }
+        .enum_for(:scan, regex)
+        .map { [Regexp.last_match.begin(0), Regexp.last_match.to_s.strip] }
     end
     instances
   end

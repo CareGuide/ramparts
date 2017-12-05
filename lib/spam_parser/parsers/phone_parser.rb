@@ -11,7 +11,7 @@ class PhoneParser
     parsed_block = parse_phone_number(block, options)
 
     # Returns the starting index and the length of the matched instance for every instance
-    return phone_number_instances("MR", parsed_block, options).length
+    phone_number_instances(MR_ALGO, parsed_block, options).length
   end
 
   def replace_phone_number_instances(block, insertable, options)
@@ -24,11 +24,11 @@ class PhoneParser
     block
   end
 
-  def find_phone_number_instances(block, _options)
+  def find_phone_number_instances(block, options)
     raise ArgumentError, ARGUMENT_ERROR_TEXT unless block.is_a? String
 
     block = block.downcase
-    return phone_number_instances("GR", block, _options)
+    phone_number_instances(GR_ALGO, block, options)
   end
 
   private
@@ -111,15 +111,15 @@ class PhoneParser
     block.gsub(/[^\w]/, '-').gsub(/[a-z]/, '.')
   end
 
-  def phone_number_instances(algo, block, options)
+  def phone_number_instances(algo, block, _options)
     # Determines which algorithm to use
-    regex = algo == "MR" ? MR_REGEX : GR_REGEX
+    regex = algo == MR_ALGO ? MR_REGEX : GR_REGEX
 
     # Returns the starting index and the length of the matched instance for every instance
     instances =
       block
-        .enum_for(:scan, regex)
-        .map { [Regexp.last_match.begin(0), Regexp.last_match.to_s] }
+      .enum_for(:scan, regex)
+      .map { [Regexp.last_match.begin(0), Regexp.last_match.to_s] }
     instances
   end
 end
