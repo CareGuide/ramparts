@@ -6,36 +6,32 @@ require_relative '../helpers'
 # Parses text and attempts to locate email
 class EmailParser
   # Counts email occurrences within a block of text
-  # Note: Uses map/reduce method
-  def count_email_instances(block, options)
-    raise ArgumentError, ARGUMENT_ERROR_TEXT unless block.is_a? String
+  # Note: Uses map reduce algorithm
+  def count_email_instances(text, options)
+    raise ArgumentError, ARGUMENT_ERROR_TEXT unless text.is_a? String
 
-    # Maps the block down to a simpler form and then finds the instances
-    block = parse_email(block)
-    email_instances(MR_ALGO, block, options).length
+    text = parse_email(text)
+    email_instances(MR_ALGO, text, options).length
   end
 
   # Replaces the occurrences of email within the block of text with an insertable
-  def replace_email_instances(block, insertable, options)
-    raise ArgumentError, ARGUMENT_ERROR_TEXT unless block.is_a? String
+  def replace_email_instances(text, insertable, options)
+    raise ArgumentError, ARGUMENT_ERROR_TEXT unless text.is_a? String
 
-    # Replaces the instances with insertable
-    instances = find_email_instances(block, options)
+    instances = find_email_instances(text, options)
     instances.map do |(start_offset, text)|
-      block[start_offset...start_offset + text.size] = insertable
+      text[start_offset...start_offset + text.size] = insertable
     end
 
-    # Returns the updated block
-    block
+    text
   end
 
   # Fins the occurrences of emails within a block of text and returns their positions
-  def find_email_instances(block, options)
-    raise ArgumentError, ARGUMENT_ERROR_TEXT unless block.is_a? String
+  def find_email_instances(text, options)
+    raise ArgumentError, ARGUMENT_ERROR_TEXT unless text.is_a? String
 
-    # Finds the occurrences of emails within the block
-    block = block.downcase
-    email_instances(GR_ALGO, block, options)
+    text = text.downcase
+    email_instances(GR_ALGO, text, options)
   end
 
   private
@@ -65,20 +61,19 @@ class EmailParser
   }.freeze
 
   # Parses the email and maps down certain occurrences
-  def parse_email(block)
-    block.downcase.gsub(/\ at\ |\(at\)|\ dot\ /, REPLACEMENTS).gsub(/[^\w\@\.\_\%\+\-]/, '$')
+  def parse_email(text)
+    text.downcase.gsub(/\ at\ |\(at\)|\ dot\ /, REPLACEMENTS).gsub(/[^\w\@\.\_\%\+\-]/, '$')
   end
 
-  def email_instances(algo, block, options)
+  def email_instances(algo, text, options)
     # Determines which algorithm to use
     regex = algo == MR_ALGO ? MR_REGEX : GR_REGEX
     regex_without_dot = algo == MR_ALGO ? MR_REGEX_WITHOUT_DOT : GR_REGEX_WITHOUT_DOT
 
     instances = []
     if options.fetch(:aggressive, false)
-      # Finds the occurrences using the correct regex
       temp_instances =
-        block
+        text
         .enum_for(:scan, regex_without_dot)
         .map { [Regexp.last_match.begin(0), Regexp.last_match.to_s.strip] }
 
@@ -88,9 +83,8 @@ class EmailParser
         instances << instance if EMAIL_DOMAINS.any? { |domain| instance[1].split('@')[1]&.include? domain }
       end
     else
-      # Finds the occurrences using the correct regex
       instances =
-        block
+        text
         .enum_for(:scan, regex)
         .map { [Regexp.last_match.begin(0), Regexp.last_match.to_s.strip] }
     end

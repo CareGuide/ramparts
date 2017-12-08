@@ -5,40 +5,36 @@ require_relative '../helpers'
 # Parses text and attempts to locate phone numbers
 class PhoneParser
   # Counts the number of phone number instances that occur within the block of text
-  def count_phone_number_instances(block, options)
-    raise ArgumentError, ARGUMENT_ERROR_TEXT unless block.is_a? String
+  def count_phone_number_instances(text, options)
+    raise ArgumentError, ARGUMENT_ERROR_TEXT unless text.is_a? String
 
-    # Parses the string and returns a string of hyphens (-) and digits
-    parsed_block = parse_phone_number(block, options)
+    parsed_text = parse_phone_number(text, options)
 
-    # Returns the starting index and the length of the matched instance for every instance
-    # Uses the Map Reduce algorithm
-    phone_number_instances(MR_ALGO, parsed_block, options).length
+    # Uses the map reduce algorithm
+    phone_number_instances(MR_ALGO, parsed_text, options).length
   end
 
   # Replaces phone number instances within the block of text with the insertable
-  def replace_phone_number_instances(block, insertable, options)
-    raise ArgumentError, ARGUMENT_ERROR_TEXT unless block.is_a? String
+  def replace_phone_number_instances(text, insertable, options)
+    raise ArgumentError, ARGUMENT_ERROR_TEXT unless text.is_a? String
 
-    # Finds the phone number instances within the text
-    instances = find_phone_number_instances(block, options)
+    instances = find_phone_number_instances(text, options)
 
-    # Replaces those instances with the insertable
     instances.map do |(start_offset, text)|
-      block[start_offset...start_offset + text.size] = insertable
+      text[start_offset...start_offset + text.size] = insertable
     end
 
-    # Returns the amended block of text
-    block
+    text
   end
 
-  #
-  def find_phone_number_instances(block, options)
-    raise ArgumentError, ARGUMENT_ERROR_TEXT unless block.is_a? String
+  # Finds phone number instances within the block of text
+  def find_phone_number_instances(text, options)
+    raise ArgumentError, ARGUMENT_ERROR_TEXT unless text.is_a? String
 
-    # Finds the phone number instances using a glorified regex
-    block = block.downcase
-    phone_number_instances(GR_ALGO, block, options)
+    text = text.downcase
+
+    # Finds the phone number instances using the glorified regex algorithm
+    phone_number_instances(GR_ALGO, text, options)
   end
 
   private
@@ -123,26 +119,25 @@ class PhoneParser
   }.freeze
 
   # Parses the phone number for MR, uses a variety of options
-  def parse_phone_number(block, options)
-    block = block.delete(' ') if options.fetch(:remove_spaces, false)
+  def parse_phone_number(text, options)
+    text = text.delete(' ') if options.fetch(:remove_spaces, false)
 
-    block = block.downcase.gsub(/#{REGEX_PHONETICS}/, REPLACEMENTS)
+    text = text.downcase.gsub(/#{REGEX_PHONETICS}/, REPLACEMENTS)
 
     if options.fetch(:parse_leet, false)
-      block = block.gsub(/#{REGEX_LEET_SPEAK}/, LEET_REPLACEMENTS)
+      text = text.gsub(/#{REGEX_LEET_SPEAK}/, LEET_REPLACEMENTS)
     end
 
-    block.gsub(/[^\w]/, '-').gsub(/[a-z]/, '.')
+    text.gsub(/[^\w]/, '-').gsub(/[a-z]/, '.')
   end
 
   # Returns the phone number instances using the specified algorithm
-  def phone_number_instances(algo, block, _options)
+  def phone_number_instances(algo, text, _options)
     # Determines which algorithm to use
     regex = algo == MR_ALGO ? MR_REGEX : GR_REGEX
 
-    # Returns the starting index and the length of the matched instance for every instance
     instances =
-      block
+      text
       .enum_for(:scan, regex)
       .map { [Regexp.last_match.begin(0), Regexp.last_match.to_s] }
     instances
