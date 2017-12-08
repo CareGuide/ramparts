@@ -5,4 +5,5 @@
 - [ ] Implement Automatic Deployments
 - [ ] Look into using hashes instead of array for testing infrastructure
 - [ ] Look into using custom rspec matchers
+- [ ] Travis badge for marketing
 - [x] Use Ruby that's already installed on TravisCI
