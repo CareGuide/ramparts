@@ -28,13 +28,7 @@ describe '#find_emails' do
     test_truthy_finds(EMAIL_TRUTHY_WITH_ANSWERS, :find_emails)
   end
 
-  # it 'parses a number of positive test blocks correctly with aggressive option and regex only' do
-  #   test_truthy_finds(EMAIL_TRUTHY_WITH_ANSWERS, :find_emails, aggressive: true)
-  # end
-
-  # it 'parses a number of positive aggressive test blocks correctly with aggressive option and regex only' do
-  #   test_truthy_finds(EMAIL_TRUTHY_AGGRESSIVE, :find_emails, aggressive: true)
-  # end
+  # TODO: Both test blocks, but passing with the aggressive option and regex only
 
   it 'parses a number of negative test blocks correctly and regex only' do
     test_falsy_finds(EMAIL_FALSY_BLOCKS, :find_emails)
