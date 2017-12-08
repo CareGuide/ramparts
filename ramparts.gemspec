@@ -1,14 +1,14 @@
 # -*- encoding: utf-8 -*-
 $:.push File.expand_path('../lib', __FILE__)
-require 'spam_parser/version'
+require 'ramparts/version'
 
 Gem::Specification.new do |s|
-  s.name        = 'spam_parser'
-  s.version     = SpamParser::VERSION
+  s.name        = 'ramparts'
+  s.version     = Ramparts::VERSION
   s.platform    = Gem::Platform::RUBY
   s.authors     = ['Brent Scheibelhut', 'Careguide']
   s.email       = ['brent.scheibelhut@careguide.com', 'info@careguide.com']
-  s.homepage    = 'https://github.com/CareGuide/spam_parser'
+  s.homepage    = 'https://github.com/CareGuide/ramparts'
   s.license     = 'MIT'
   s.summary     = %q{Parses blocks of text to find phone numbers (including phonetic numbers), emails, and bad url}
   s.description = %q{Parses blocks of text to find phone numbers (including phonetic numbers), emails, and bad url. Useful for finding scammers who tend to try to post their phone number in messages.}

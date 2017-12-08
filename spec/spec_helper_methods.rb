@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-require './lib/spam_parser'
+require './lib/ramparts'
 
 # Times a method run length in milliseconds
 def time_method(method, *args)
   beginning_time = Time.now
-  SpamParser.send(method, args[0])
+  Ramparts.send(method, args[0])
   end_time = Time.now
   milliseconds = (end_time - beginning_time) * 1000
   milliseconds
@@ -33,7 +33,7 @@ end
 # Test helper for testing truthy values against count type methods
 def test_truthy_count(iterator, method, options = {})
   iterator.each do |block|
-    matches = SpamParser.send(method, block[1], options)
+    matches = Ramparts.send(method, block[1], options)
     expect(matches)
       .to eq(block[0].length),
           "Expected #{block[0].length}, got #{matches} for '#{block[1]}'"
@@ -43,7 +43,7 @@ end
 # Test helper for testing truthy values against find type methods
 def test_truthy_finds(iterator, method, options = {})
   iterator.each do |block|
-    matches = SpamParser.send(method, block[1], options)
+    matches = Ramparts.send(method, block[1], options)
     block[0].each_with_index do |match_string, index|
       if matches[index].nil? || matches[index][:value].casecmp(match_string) != 0
         got_result = matches[index].nil? ? 'NIL' : matches[index][1]
@@ -56,7 +56,7 @@ end
 # Test helper for testing falsy values against count type methods
 def test_falsy_count(iterator, method, options = {})
   iterator.each do |block|
-    matches = SpamParser.send(method, block, options)
+    matches = Ramparts.send(method, block, options)
     expect(matches).to eq(0), "Expected empty array, got #{matches} for '#{block}'"
   end
 end
@@ -64,7 +64,7 @@ end
 # Test helper for testing falsy values against find type methods
 def test_falsy_finds(iterator, method, options = {})
   iterator.each do |block|
-    matches = SpamParser.send(method, block, options)
+    matches = Ramparts.send(method, block, options)
     expect(matches.length).to eq(0), "Expected empty array, got #{matches.length} for '#{block}'"
   end
 end

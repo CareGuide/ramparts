@@ -1,4 +1,4 @@
-# Spam Parser
+# Ramparts - Spam Detection
 Parses blocks of text to find phone numbers (including phonetic numbers), emails, and spammer urls
 
 ## Example
@@ -7,7 +7,7 @@ Find obfuscated phone numbers
 
 ```
 >> message = "Contact me directly ( FOUR ONE FIVE E I G H T 9 FOUR TWO EIGHT SIX FIVE  ). Hope you cracked that number code."
->> SpamParser.find_phone_numbers(message)
+>> Ramparts.find_phone_numbers(message)
 [{offset: 22, value: 'FOUR ONE FIVE E I G H T 9 FOUR TOO EIGHT SIX FIVE'}]
 ```
 
@@ -15,7 +15,7 @@ Find obfuscated emails.
 
 ```
 >> message = "Looking for honest worker .. contact ashley73299 AT yahoo dot com for more info"
->> SpamParser.find_emails(message)
+>> Ramparts.find_emails(message)
 [{offset: 37, value: 'ashley73299 AT yahoo dot com'}]
 ```
 
@@ -23,7 +23,7 @@ Count the occurrences of well known spam URLs and keywords
 
 ```
 >> message = ""cialis vs viagra spam guestbook.php?action=http://cialiswalmart.shop""
->> SpamParser.count_urls(message)
+>> Ramparts.count_urls(message)
 3
 ```
 

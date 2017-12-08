@@ -1,6 +1,6 @@
 # Contributing
 
-Everyone is welcome to contribute to SpamParser. Contributing doesn’t just mean submitting pull requests—there are many different ways for you to get involved, including answering questions, reporting or triaging [issues](https://github.com/CareGuide/spam-parser/issues), et al.
+Everyone is welcome to contribute to Ramparts. Contributing doesn’t just mean submitting pull requests—there are many different ways for you to get involved, including answering questions, reporting or triaging [issues](https://github.com/CareGuide/ramparts/issues), et al.
 
 No matter how you want to get involved, we ask that you be kind, and treat others on the project with respect.
 
@@ -18,10 +18,10 @@ Some things that will increase the chance that your pull request is accepted:
 
 # Stale issue and pull request policy
 
-Issues and pull requests have a shelf life and sometimes they are no longer relevant. All issues and pull requests that have not had any activity for 90 days will be marked as `stale`. Simply leave a comment with information about why it may still be relevant to keep it open. If no activity occurs in the next 7 days, it will be closed. (See [Roadmap](https://github.com/CareGuide/spam-parser/blob/master/ROADMAP.md) for automatic implementation)
+Issues and pull requests have a shelf life and sometimes they are no longer relevant. All issues and pull requests that have not had any activity for 90 days will be marked as `stale`. Simply leave a comment with information about why it may still be relevant to keep it open. If no activity occurs in the next 7 days, it will be closed. (See [Roadmap](https://github.com/CareGuide/ramparts/blob/master/ROADMAP.md) for automatic implementation)
 
 The goal of this process is to keep the list of open issues and pull requests focused on work that is actionable and important for the maintainers and the community.
 
 # Pull Request Reviews & releasing
 
-Once pull request has been given approval, leadership will realease and deploy the gem (See [Roadmap](https://github.com/CareGuide/spam-parser/blob/master/ROADMAP.md)) for automatic deploys)
+Once pull request has been given approval, leadership will realease and deploy the gem (See [Roadmap](https://github.com/CareGuide/ramparts/blob/master/ROADMAP.md)) for automatic deploys)

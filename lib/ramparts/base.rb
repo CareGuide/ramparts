@@ -4,7 +4,7 @@ require_relative './parsers/email_parser'
 require_relative './parsers/phone_parser'
 require_relative './parsers/url_parser'
 
-class SpamParser
+class Ramparts
   def self.count_phone_numbers(text, options = {})
     pp = PhoneParser.new
     pp.count_phone_number_instances(text, options)

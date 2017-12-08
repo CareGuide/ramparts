@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require './lib/spam_parser'
+require './lib/ramparts'
 require_relative '../spec_helper_methods'
 require_relative '../data/email_data/truthy_email_data'
 require_relative '../data/email_data/falsy_email_data'
