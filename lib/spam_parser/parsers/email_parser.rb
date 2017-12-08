@@ -19,8 +19,8 @@ class EmailParser
     raise ArgumentError, ARGUMENT_ERROR_TEXT unless text.is_a? String
 
     instances = find_email_instances(text, options)
-    instances.map do |(start_offset, text)|
-      text[start_offset...start_offset + text.size] = insertable
+    instances.map do |(start_offset, instance_text)|
+      instance_text[start_offset...start_offset + instance_text.size] = insertable
     end
 
     text

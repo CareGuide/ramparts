@@ -20,8 +20,8 @@ class PhoneParser
 
     instances = find_phone_number_instances(text, options)
 
-    instances.map do |(start_offset, text)|
-      text[start_offset...start_offset + text.size] = insertable
+    instances.map do |(start_offset, instance_text)|
+      instance_text[start_offset...start_offset + instance_text.size] = insertable
     end
 
     text
