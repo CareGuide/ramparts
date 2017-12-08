@@ -23,6 +23,8 @@ class UrlParser
 
   # Returns the instances that match the regex
   def url_instances(text, _options)
-    text.enum_for(:scan, BAD_URL_REGEX).map { [Regexp.last_match.begin(0), Regexp.last_match.to_s.strip] }
+    text
+      .enum_for(:scan, BAD_URL_REGEX)
+      .map { { offset: Regexp.last_match.begin(0), value: Regexp.last_match.to_s.strip } }
   end
 end

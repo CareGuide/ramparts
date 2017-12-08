@@ -75,18 +75,18 @@ class EmailParser
       temp_instances =
         text
         .enum_for(:scan, regex_without_dot)
-        .map { [Regexp.last_match.begin(0), Regexp.last_match.to_s.strip] }
+        .map { { offset: Regexp.last_match.begin(0), value: Regexp.last_match.to_s.strip } }
 
       # Since this is the aggressive option where '.com' or similar isn't needed
       # Check to make sure the last word of the string is a domain
       temp_instances.each do |instance|
-        instances << instance if EMAIL_DOMAINS.any? { |domain| instance[1].split('@')[1]&.include? domain }
+        instances << instance if EMAIL_DOMAINS.any? { |domain| instance[:value].split('@')[1]&.include? domain }
       end
     else
       instances =
         text
         .enum_for(:scan, regex)
-        .map { [Regexp.last_match.begin(0), Regexp.last_match.to_s.strip] }
+        .map { { offset: Regexp.last_match.begin(0), value: Regexp.last_match.to_s.strip } }
     end
     instances
   end

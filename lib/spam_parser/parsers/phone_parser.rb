@@ -139,7 +139,7 @@ class PhoneParser
     instances =
       text
       .enum_for(:scan, regex)
-      .map { [Regexp.last_match.begin(0), Regexp.last_match.to_s] }
+      .map { { offset: Regexp.last_match.begin(0), value: Regexp.last_match.to_s.strip } }
     instances
   end
 end

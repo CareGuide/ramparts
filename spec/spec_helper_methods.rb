@@ -45,7 +45,7 @@ def test_truthy_finds(iterator, method, options = {})
   iterator.each do |block|
     matches = SpamParser.send(method, block[1], options)
     block[0].each_with_index do |match_string, index|
-      if matches[index].nil? || matches[index][1].casecmp(match_string) != 0
+      if matches[index].nil? || matches[index][:value].casecmp(match_string) != 0
         got_result = matches[index].nil? ? 'NIL' : matches[index][1]
         raise "Expected: #{match_string}\nGot: #{got_result}\nBlock '#{block[1]}'\nResult: #{matches}"
       end
