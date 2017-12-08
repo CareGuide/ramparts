@@ -18,7 +18,7 @@ Some things that will increase the chance that your pull request is accepted:
 
 # Branch Naming
 
-Please follow the following naming convention for branch names.
+Please follow the following naming convention for branch names. Use `-` to separate words.
 
 - Use `feature/...` for feature related changes
 - Use `fix/...` for changes that fix a bug
