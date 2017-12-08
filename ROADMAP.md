@@ -7,3 +7,4 @@
 - [ ] Look into using custom rspec matchers
 - [ ] Travis badge for marketing
 - [x] Use Ruby that's already installed on TravisCI
+- [ ] Use threads for true Map/Reduce. Look into [Celluloid](https://github.com/celluloid/celluloid)
