@@ -19,11 +19,7 @@ class EmailParser
     raise ArgumentError, ARGUMENT_ERROR_TEXT unless text.is_a? String
 
     instances = find_email_instances(text, options)
-    instances.map do |(start_offset, instance_text)|
-      instance_text[start_offset...start_offset + instance_text.size] = insertable
-    end
-
-    text
+    replace(text, insertable, instances)
   end
 
   # Fins the occurrences of emails within a block of text and returns their positions
@@ -42,16 +38,16 @@ class EmailParser
   # rubocop:disable LineLength
 
   # Regex to find the emails, must have .com or something similar to match
-  GR_REGEX = Regexp.new(/(([#{TEXT_MATCH}]{1}[^\w]{1})+|([#{TEXT_MATCH}])+)([^\w]+(at){1}[^\w]+|[^\w]*@[^\w]*){1}[a-z0-9.-]+(([^\w]*\.[^\w]*|[^\w]+(dot){1}[^\w]+){1}[a-z]{2,})+/)
+  GR_REGEX = Regexp.new(/(([#{TEXT_MATCH}]{1}[^\w]{1})+|([#{TEXT_MATCH}])+)([^\w]+(at){1}[^\w]+|[^\w]*@[^\w]*){1}[a-z0-9.-]+((\.|[^\w]+(dot){1}[^\w]+){1}[a-z]{2,})+/)
   # Regex to find the emails, does .com or something similar to match
   GR_REGEX_WITHOUT_DOT = Regexp.new(/(([#{TEXT_MATCH}]{1}[^\w]{1})+|([#{TEXT_MATCH}])+)([^\w]+(at){1}[^\w]+|[^\w]*@[^\w]*){1}[a-z0-9.-]+([^\w]*\.[^\w]*|[^\w]+(dot){1}[^\w]+)?([a-z]{2,})?/)
 
   # rubocop:enable LineLength
 
   # Regex to find emails for MapReduce, must have .com or something similar to match
-  MR_REGEX = Regexp.new(/[a-z0-9._%+-]+\${,2}@{1}\${,2}[a-z0-9.-]+\${,2}(\.){1}/)
+  MR_REGEX = Regexp.new(/[a-z0-9._%+-]+\${,2}@{1}\${,2}[a-z0-9.-]+\${,2}(\.){1}[a-z]{2,}/)
   # Regex to find emails for MapReduce, does not have to have .com or something similar to match
-  MR_REGEX_WITHOUT_DOT = Regexp.new(/[a-z0-9._%+-]+\${,2}@{1}\${,2}[a-z0-9.-]+\${,2}/)
+  MR_REGEX_WITHOUT_DOT = Regexp.new(/[a-z0-9._%+-]+\${,2}@{1}\${,2}[a-z0-9.-]+/)
 
   # Map these occurences down to their constituent parts
   REPLACEMENTS = {
@@ -72,10 +68,7 @@ class EmailParser
 
     instances = []
     if options.fetch(:aggressive, false)
-      temp_instances =
-        text
-        .enum_for(:scan, regex_without_dot)
-        .map { { offset: Regexp.last_match.begin(0), value: Regexp.last_match.to_s.strip } }
+      temp_instances = scan(text, regex_without_dot, :email)
 
       # Since this is the aggressive option where '.com' or similar isn't needed
       # Check to make sure the last word of the string is a domain
@@ -83,10 +76,7 @@ class EmailParser
         instances << instance if EMAIL_DOMAINS.any? { |domain| instance[:value].split('@')[1]&.include? domain }
       end
     else
-      instances =
-        text
-        .enum_for(:scan, regex)
-        .map { { offset: Regexp.last_match.begin(0), value: Regexp.last_match.to_s.strip } }
+      instances = scan(text, regex, :email)
     end
     instances
   end

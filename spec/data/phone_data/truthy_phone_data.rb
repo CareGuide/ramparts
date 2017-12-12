@@ -1,8 +1,10 @@
-PHONE_TRUTHY_WITH_ANSWER_AND_SPACES = [
-  [["f i v e - ( F O U R . O N E . 5 . E I G H T . n i N E . F O U R . T W O . E I G H T . SIX . FIVE"], "If you're interested in this position, do contact me directly on my phone number f i v e - ( F O U R . O N E . 5 . E I G H T . n i N E . F O U R . T W O . E I G H T . SIX . FIVE )."]
-]
+# frozen_string_literal: true
 
-PHONE_TRUTHY_WITH_ANSWER = [
+PHONE_TRUTHY_WITH_ANSWERS_AND_SPACES = [
+  [["f i v e - ( F O U R . O N E . 5 . E I G H T . n i N E . F O U R . T W O . E I G H T . SIX . FIVE"], "If you're interested in this position, do contact me directly on my phone number f i v e - ( F O U R . O N E . 5 . E I G H T . n i N E . F O U R . T W O . E I G H T . SIX . FIVE )."]
+].freeze
+
+PHONE_TRUTHY_WITH_ANSWERS = [
   [["3.2.3.4.3.8.4.8.3.8"], "I need a babysitter and errand for my son textme direct on my number if you are interested 3.2.3.4.3.8.4.8.3.8"],
   [["6477005290"], "Aron's phone number is 6477005290"],
   [["three four seven nine 3 two five one zero two"], "i Rebecca! I saw your profile and would like to know more. my name is Adriana Medrano, from TIDY N' CLEAN CLEANING SERVICES LLC, this message regarding your request for housekeeping services, I'm a very responsable and honest house cleaner, let me help you clean your house. please call or text me at three four seven nine 3 two five one zero two, I'm looking forward to serve you"],
@@ -21,5 +23,5 @@ PHONE_TRUTHY_WITH_ANSWER = [
   [["4.0.4.Nine.Three.Seven.6.7.0.8"], "Hello this is Mary seeking for sitter to babysit my son if you interested kind get back to me asap!contact me direct on my digit number 4.0.4.Nine.Three.Seven.6.7.0.8"],
   [["THREE, ONE, TWO, FIVE, TWO, SIX, SIX, FOUR, FIVE, FOUR"], "Hi there, I hope you’re having a great week. I am quite impressed with your profile on here and would like to know more. I am looking to employ an experienced, loyal, dedicated, caring and responsible nanny to look after my kids due to my very busy schedule with work. If you're interested in this position, do contact me directly on my phone number( THREE, ONE, TWO, FIVE, TWO, SIX, SIX, FOUR, FIVE, FOUR). Hope you cracked that number code. I'd prefer you text first with an introduction then I can give you a call back. Have a great day ahead"],
   [["213...788... 5383"], "Hi there, Hope you had a great weekend. I am impressed with your profile on here and would like to know more about you. I am looking to employ an experienced,loyal, dedicated, caring and responsible person to look after my dogs due to my very busy schedule with work. If you're interested in this position, do contact me directly on my phone number 213...788... 5383. Hope you cracked that number code. I'd prefer you text first with an introduction then I can give you a call back. Have a great day ahead. tanosha"],
-  [["213........788......... 5383"], "Hi there, Hope you had a great weekend. I am impressed with your profile on here and would like to know more about you. I am looking to employ an experienced,loyal, dedicated, caring and responsible person to look after my dogs due to my very busy schedule with work. If you're interested in this position, do contact me directly on my phone number 213........788......... 5383. Hope you cracked that number code. I'd prefer you text first with an introduction then I can give you a call back. Have a great day ahead. tanosha"],
-]
+  [["213........788......... 5383"], "Hi there, Hope you had a great weekend. I am impressed with your profile on here and would like to know more about you. I am looking to employ an experienced,loyal, dedicated, caring and responsible person to look after my dogs due to my very busy schedule with work. If you're interested in this position, do contact me directly on my phone number 213........788......... 5383. Hope you cracked that number code. I'd prefer you text first with an introduction then I can give you a call back. Have a great day ahead. tanosha"]
+].freeze

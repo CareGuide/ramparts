@@ -2,7 +2,6 @@ AllCops:
   TargetRubyVersion: 2.3
   Exclude:
     - 'ramparts.gemspec'
-    - 'spec/data/**/*'
 
 ClassLength:
   Enabled: false
@@ -28,8 +27,22 @@ Style/DoubleNegation:
 Style/ConditionalAssignment:
   Enabled: false
 
+Style/StringLiterals:
+  Exclude:
+    - 'spec/data/**/*'
+
+Layout/SpaceAfterComma:
+  Exclude:
+    - 'spec/data/**/*'
+
+Style/WordArray:
+  Exclude:
+    - 'spec/data/**/*'
+
 LineLength:
   Max: 120
+  Exclude:
+    - 'spec/data/**/*'
 
 BlockLength:
   Exclude:

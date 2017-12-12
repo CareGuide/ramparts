@@ -19,12 +19,7 @@ class PhoneParser
     raise ArgumentError, ARGUMENT_ERROR_TEXT unless text.is_a? String
 
     instances = find_phone_number_instances(text, options)
-
-    instances.map do |(start_offset, instance_text)|
-      instance_text[start_offset...start_offset + instance_text.size] = insertable
-    end
-
-    text
+    replace(text, insertable, instances)
   end
 
   # Finds phone number instances within the block of text
@@ -120,11 +115,11 @@ class PhoneParser
 
   # Parses the phone number for MR, uses a variety of options
   def parse_phone_number(text, options)
-    text = text.delete(' ') if options.fetch(:remove_spaces, false)
+    text = text.delete(' ') if options.fetch(:remove_spaces, true)
 
     text = text.downcase.gsub(/#{REGEX_PHONETICS}/, REPLACEMENTS)
 
-    if options.fetch(:parse_leet, false)
+    if options.fetch(:parse_leet, true)
       text = text.gsub(/#{REGEX_LEET_SPEAK}/, LEET_REPLACEMENTS)
     end
 
@@ -136,10 +131,7 @@ class PhoneParser
     # Determines which algorithm to use
     regex = algo == MR_ALGO ? MR_REGEX : GR_REGEX
 
-    instances =
-      text
-      .enum_for(:scan, regex)
-      .map { { offset: Regexp.last_match.begin(0), value: Regexp.last_match.to_s.strip } }
+    instances = scan(text, regex, :phone)
     instances
   end
 end

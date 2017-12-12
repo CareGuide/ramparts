@@ -8,3 +8,8 @@
 - [ ] Travis badge for marketing
 - [x] Use Ruby that's already installed on TravisCI
 - [ ] Use threads for true Map/Reduce. Look into [Celluloid](https://github.com/celluloid/celluloid)
+- [ ] Have check domain (for email matches) as an option to allow for reduce over matching
+- [ ] Check TLD to make sure it's a valid TLD as an option to reduce over matching
+- [ ] Refactor tests to use hashes instead of arrays
+- [ ] Robust-ify the overlapping interval scenario
+- [ ] Creating a `spec_helper.rb` and use tools like SimpleCov, Shoulda matchers, and test randomization.
