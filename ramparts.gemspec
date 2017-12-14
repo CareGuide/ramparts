@@ -15,6 +15,7 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency 'rspec', '~> 2.5', '>= 2.5.0'
   s.add_development_dependency 'rubocop', '~>0.51.0'
+  s.add_development_dependency 'simplecov', '~>0.15.1'
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")

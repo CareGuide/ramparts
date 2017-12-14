@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require './lib/ramparts'
-require_relative '../spec_helper_methods'
 require_relative '../data/phone_data/truthy_phone_data'
 require_relative '../data/phone_data/falsy_phone_data'
 
@@ -42,6 +40,12 @@ describe '#find_phone_numbers' do
 
   it 'parses a number of negative test blocks correctly with glorified regex' do
     test_falsy_finds(PHONE_FALSY_BLOCKS, :find_phone_numbers)
+  end
+end
+
+describe '#replace_phone_numbers' do
+  it 'replaces a number of positive test blocks correctly with phone replacer' do
+    test_replacements(PHONE_TRUTHY_WITH_ANSWERS, :replace_phone_numbers)
   end
 end
 

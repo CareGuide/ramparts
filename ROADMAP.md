@@ -3,13 +3,16 @@
 - [ ] Implement options for `find_phone_numbers` and `replace_phone_numbers`
 - [x] Implement [Stale](https://github.com/probot/stale) for issue
 - [ ] Implement Automatic Deployments
-- [ ] Look into using hashes instead of array for testing infrastructure
+- [x] Look into using hashes instead of array for testing infrastructure
 - [ ] Look into using custom rspec matchers
 - [ ] Travis badge for marketing
 - [x] Use Ruby that's already installed on TravisCI
 - [ ] Use threads for true Map/Reduce. Look into [Celluloid](https://github.com/celluloid/celluloid)
-- [ ] Have check domain (for email matches) as an option to allow for reduce over matching
+- [ ] Have check domain (for email matches) as an option (not only on :aggressive option) to reduce over matching
 - [ ] Check TLD to make sure it's a valid TLD as an option to reduce over matching
-- [ ] Refactor tests to use hashes instead of arrays
+- [x] Refactor tests to use hashes instead of arrays
 - [ ] Robust-ify the overlapping interval scenario
-- [ ] Creating a `spec_helper.rb` and use tools like SimpleCov, Shoulda matchers, and test randomization.
+- [ ] Get setup on Code Climate once the repo goes open source
+- [ ] Think about using InchCI (inline docs) instead of README
+- [x] Creating a `spec_helper.rb` and use tools like SimpleCov, 
+- [ ] Look into using Shoulda matchers, and test randomization.

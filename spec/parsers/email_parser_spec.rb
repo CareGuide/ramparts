@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require './lib/ramparts'
-require_relative '../spec_helper_methods'
 require_relative '../data/email_data/truthy_email_data'
 require_relative '../data/email_data/falsy_email_data'
 
@@ -32,6 +30,12 @@ describe '#find_emails' do
 
   it 'parses a number of negative test blocks correctly and regex only' do
     test_falsy_finds(EMAIL_FALSY_BLOCKS, :find_emails)
+  end
+end
+
+describe '#replace_emails' do
+  it 'replaces a number of positive test blocks correctly with email replacer' do
+    test_replacements(EMAIL_TRUTHY_WITH_ANSWERS, :replace_emails)
   end
 end
 

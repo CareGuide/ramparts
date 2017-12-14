@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require './lib/ramparts'
-require_relative '../spec_helper_methods'
 require_relative '../data/url_data/truthy_url_data'
 require_relative '../data/url_data/falsy_url_data'
 
