@@ -19,7 +19,7 @@ class EmailParser
     raise ArgumentError, ARGUMENT_ERROR_TEXT unless text.is_a? String
 
     instances = find_email_instances(text, options)
-    replace(text, insertable, instances)
+    replace(text, insertable, instances.reverse!)
   end
 
   # Fins the occurrences of emails within a block of text and returns their positions

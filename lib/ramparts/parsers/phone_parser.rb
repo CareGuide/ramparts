@@ -19,7 +19,7 @@ class PhoneParser
     raise ArgumentError, ARGUMENT_ERROR_TEXT unless text.is_a? String
 
     instances = find_phone_number_instances(text, options)
-    replace(text, insertable, instances)
+    replace(text, insertable, instances.reverse!)
   end
 
   # Finds phone number instances within the block of text
