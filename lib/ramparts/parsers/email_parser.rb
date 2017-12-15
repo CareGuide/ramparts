@@ -38,7 +38,9 @@ class EmailParser
   # rubocop:disable LineLength
 
   # Regex to find the emails, must have .com or something similar to match
-  GR_REGEX = Regexp.new(/(([#{TEXT_MATCH}]{1}[^\w]{1})+|([#{TEXT_MATCH}])+)([^\w]+(at){1}[^\w]+|[^\w]*@[^\w]*){1}[a-z0-9.-]+((\.|[^\w]+(dot){1}[^\w]+){1}[a-z]{2,})+/)
+  GR_REGEX = Regexp.new(/(([#{TEXT_MATCH}]{1}[^\w]{1})+|([#{TEXT_MATCH}])+)([^\w]*@[^\w]*){1}[a-z0-9.-]+((\.|[^\w]+(dot){1}[^\w]+){1}[a-z]{2,})+/)
+  # Regex to find the emails, must have .com or something similar to match and also checks for the word 'at' as '@'
+  GR_REGEX_WITH_AT = Regexp.new(/(([#{TEXT_MATCH}]{1}[^\w]{1})+|([#{TEXT_MATCH}])+)([^\w]+(at){1}[^\w]+|[^\w]*@[^\w]*){1}[a-z0-9.-]+((\.|[^\w]+(dot){1}[^\w]+){1}[a-z]{2,})+/)
   # Regex to find the emails, does .com or something similar to match
   GR_REGEX_WITHOUT_DOT = Regexp.new(/(([#{TEXT_MATCH}]{1}[^\w]{1})+|([#{TEXT_MATCH}])+)([^\w]+(at){1}[^\w]+|[^\w]*@[^\w]*){1}[a-z0-9.-]+([^\w]*\.[^\w]*|[^\w]+(dot){1}[^\w]+)?([a-z]{2,})?/)
 
@@ -65,6 +67,7 @@ class EmailParser
     # Determines which algorithm to use
     regex = algo == MR_ALGO ? MR_REGEX : GR_REGEX
     regex_without_dot = algo == MR_ALGO ? MR_REGEX_WITHOUT_DOT : GR_REGEX_WITHOUT_DOT
+    regex_with_at = GR_REGEX_WITH_AT
 
     instances = []
     if options.fetch(:aggressive, false)
@@ -75,6 +78,8 @@ class EmailParser
       temp_instances.each do |instance|
         instances << instance if EMAIL_DOMAINS.any? { |domain| instance[:value].split('@')[1]&.include? domain }
       end
+    elsif options.fetch(:check_for_at, false)
+      instances = scan(text, regex_with_at, :email)
     else
       instances = scan(text, regex, :email)
     end

@@ -112,8 +112,10 @@ of text.
     - options **[Hash]**
         - aggressive **[Boolean] [Default &rightarrow; `False`]**
             - doesn't require a `.` or `dot` + a TLD at the end, but instead compares the last word against a well known list of email domains (eg. `contact ashley @ yandex for more info` would be caught)
- - **Output:** 
-     - **[Array]**
+        - check_for_at **[Boolean] [Default &rightarrow; `False`]**
+            - checks for the word 'at' as '@', currently can result in algorithm being overly greedy as 'at' is such a common word
+- **Output:**
+    - **[Array]**
         - match **[Hash]**
             - offset: **[Integer]**
             - value: **[String]**
@@ -130,6 +132,8 @@ of text.
     - options **[Hash]**
          - aggressive **[Boolean] [Default &rightarrow; `False`]**
             - doesn't require a `.` or `dot` + a TLD at the end, but instead compares the last word against a well known list of email domains (eg. `contact ashley @ yandex for more info` would be caught)
+         - check_for_at **[Boolean] [Default &rightarrow; `False`]**
+             - checks for the word 'at' as '@', currently can result in algorithm being overly greedy as 'at' is such a common word
 - **Output:** 
     - updated text **[String]**   
 - **Example**
@@ -151,6 +155,8 @@ of text.
             - Parses phone numbers that contain spaces between the numbers. With this set to true eg. `F i v E 4 3 F 0 r O n 3 67 N i N 3` would be caught.
          - aggressive **[Boolean] [Default &rightarrow; `False`]**
             - doesn't require a `.` or `dot` + a TLD at the end, but instead compares the last word against a well known list of email domains (eg. `contact ashley @ yandex for more info` would be caught)
+         - check_for_at **[Boolean] [Default &rightarrow; `False`]**
+            - checks for the word 'at' as '@', currently can result in algorithm being overly greedy as 'at' is such a common word
  - **Output:** 
      - number of occurences of emails **[Integer]**
  - **Example**
@@ -170,7 +176,9 @@ of text.
             - Parses phone numbers that contain spaces between the numbers. With this set to true eg. `F i v E 4 3 F 0 r O n 3 67 N i N 3` would be caught.
         - aggressive **[Boolean] [Default &rightarrow; `False`]**
             - doesn't require a `.` or `dot` + a TLD at the end, but instead compares the last word against a well known list of email domains (eg. `contact ashley @ yandex for more info` would be caught)
- - **Output:** 
+        - check_for_at **[Boolean] [Default &rightarrow; `False`]**
+            - checks for the word 'at' as '@', currently can result in algorithm being overly greedy as 'at' is such a common word
+ - **Output:**
      - **[Array]**
         - match **[Hash]**
             - offset: **[Integer]**
@@ -192,6 +200,8 @@ of text.
             - Parses phone numbers that contain spaces between the numbers. With this set to true eg. `F i v E 4 3 F 0 r O n 3 67 N i N 3` would be caught.
          - aggressive **[Boolean] [Default &rightarrow; `False`]**
             - doesn't require a `.` or `dot` + a TLD at the end, but instead compares the last word against a well known list of email domains (eg. `contact ashley @ yandex for more info` would be caught)
+         - check_for_at **[Boolean] [Default &rightarrow; `False`]**
+             - checks for the word 'at' as '@', currently can result in algorithm being overly greedy as 'at' is such a common word
 - **Output:** 
     - updated text **[String]**   
 - **Example**

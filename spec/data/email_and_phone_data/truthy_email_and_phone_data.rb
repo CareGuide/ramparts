@@ -19,5 +19,15 @@ EMAIL_PHONE_TRUTHY_WITH_ANSWERS = [
     matches: ["555-545-5454", "johnkrueger@johnson.com"],
     text: "You can contact me at johnkrueger@johnson.com, or call me at 555-545-5454. Please get in touch.",
     filtered: "You can contact me at #{INSERTABLE}, or call me at #{INSERTABLE}. Please get in touch."
+  },
+  {
+    matches: ["416-545-5454", "john.krueger@johnson.com"],
+    text: "You can contact me at john.krueger@johnson.com, or call me at 416-545-5454. Please get in touch.",
+    filtered: "You can contact me at #{INSERTABLE}, or call me at #{INSERTABLE}. Please get in touch."
+  },
+  {
+    matches: ["416-545-5454", "john.krueger@johnson.com"],
+    text: "You can contact me at john.krueger@johnson.com, or call me at 416-545-5454. Please get in touch.",
+    filtered: "You can contact me at #{INSERTABLE}, or call me at #{INSERTABLE}. Please get in touch."
   }
 ].freeze
