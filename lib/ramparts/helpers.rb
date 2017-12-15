@@ -16,10 +16,11 @@ MR_ALGO = 'MR'.freeze
 GR_ALGO = 'GR'.freeze
 
 # Given some text it replaces each matched instance with the given insertable
-def replace(text, insertable, instances)
+def replace(text, instances, &block) # rubocop:disable Lint/UnusedMethodArgument
   altered_text = String.new(text)
 
   instances.map do |instance|
+    insertable = yield instance
     altered_text[instance[:start_offset]...instance[:end_offset]] = insertable
   end
   altered_text

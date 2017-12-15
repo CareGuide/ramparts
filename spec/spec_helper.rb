@@ -61,7 +61,9 @@ end
 # Test helper for testing truthy values against find type methods
 def test_replacements(tests, method, options = {})
   tests.each do |test|
-    text = Ramparts.send(method, test[:text], INSERTABLE, options)
+    text = Ramparts.send(method, test[:text], options) do
+      INSERTABLE
+    end
     if text.casecmp(test[:filtered]) != 0
       raise "Expected: #{test[:filtered]}\nGot: #{text}\nBlock '#{test[:filtered]}'"
     end

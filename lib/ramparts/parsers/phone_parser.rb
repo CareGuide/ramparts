@@ -15,11 +15,11 @@ class PhoneParser
   end
 
   # Replaces phone number instances within the block of text with the insertable
-  def replace_phone_number_instances(text, insertable, options)
+  def replace_phone_number_instances(text, options, &block)
     raise ArgumentError, ARGUMENT_ERROR_TEXT unless text.is_a? String
 
     instances = find_phone_number_instances(text, options)
-    replace(text, insertable, instances.reverse!)
+    replace(text, instances.reverse!, &block)
   end
 
   # Finds phone number instances within the block of text

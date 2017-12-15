@@ -15,11 +15,11 @@ class EmailParser
   end
 
   # Replaces the occurrences of email within the block of text with an insertable
-  def replace_email_instances(text, insertable, options)
+  def replace_email_instances(text, options, &block)
     raise ArgumentError, ARGUMENT_ERROR_TEXT unless text.is_a? String
 
     instances = find_email_instances(text, options)
-    replace(text, insertable, instances.reverse!)
+    replace(text, instances.reverse!, &block)
   end
 
   # Fins the occurrences of emails within a block of text and returns their positions
