@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
   s.name        = 'ramparts'
   s.version     = Ramparts::VERSION
   s.platform    = Gem::Platform::RUBY
-  s.authors     = ['Brent Scheibelhut', 'Careguide']
+  s.authors     = ['Brent Scheibelhut', 'CareGuide']
   s.email       = ['brent.scheibelhut@careguide.com', 'info@careguide.com']
   s.homepage    = 'https://github.com/CareGuide/ramparts'
   s.license     = 'MIT'

@@ -54,6 +54,7 @@ EMAIL_DOMAINS = %w[
   maine
   inbox
   optimum
+  example
   yhaoo
   yorku
   mchsi

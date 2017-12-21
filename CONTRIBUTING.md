@@ -31,6 +31,10 @@ Run linting tests on your branch simply by typing `rubocop` when within the top 
 
 Run general unit tests simply by typing `rspec` when within the top level directory
 
+When writing tests please have the [first three digits](https://en.wikipedia.org/wiki/555_(telephone_number)) (not the area code) of phone numbers as `555` (or the phonetic/l33t equivalent) to avoid collisions with actual phone numbers
+
+Please also use `example` for the domain of test email addresses for a similar reason
+
 # Stale issue and pull request policy
 
 Issues and pull requests have a shelf life and sometimes they are no longer relevant. All issues and pull requests that have not had any activity for 60 days will be marked as `stale`. Simply leave a comment with information about why it may still be relevant to keep it open. If no activity occurs in the next 7 days, the issue will be automatically closed. Stale PR's will be closed manually.
