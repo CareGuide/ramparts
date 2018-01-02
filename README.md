@@ -1,4 +1,4 @@
-# Ramparts - Spam Detection
+# Ramparts - Spam Detection ![Build Status](https://travis-ci.com/CareGuide/ramparts.svg?token=pzv1C7M8Vzq9xx1zxDRH&branch=master)
 Parses blocks of text to find phone numbers (including phonetic numbers), emails, and spammer urls
 
 ## Example
