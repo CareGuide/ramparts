@@ -1,4 +1,5 @@
-# Ramparts - Spam Detection ![Build Status](https://travis-ci.com/CareGuide/ramparts.svg?token=pzv1C7M8Vzq9xx1zxDRH&branch=master) [![Maintainability](https://api.codeclimate.com/v1/badges/5b5bcd41603e34dbc615/maintainability)](https://codeclimate.com/github/CareGuide/ramparts/maintainability)
+# Ramparts - Spam Detection ![Build Status](https://travis-ci.com/CareGuide/ramparts.svg?token=pzv1C7M8Vzq9xx1zxDRH&branch=master) [![Maintainability](https://api.codeclimate.com/v1/badges/5b5bcd41603e34dbc615/maintainability)](https://codeclimate.com/github/CareGuide/ramparts/maintainability) [![Gem Version](https://badge.fury.io/rb/ramparts.svg)](http://badge.fury.io/rb/ramparts)
+
 Parses blocks of text to find phone numbers (including phonetic numbers), emails, and spammer urls
 
 ## Example
@@ -33,6 +34,16 @@ Count the occurrences of well known spam URLs and keywords
 >> message = ""cialis vs viagra spam guestbook.php?action=http://cialiswalmart.shop""
 >> Ramparts.count_urls(message)
 3
+```
+## Installation
+
+In the root directory of your project
+```
+gem install ramparts
+```
+Remember to require `ramparts` as necessary
+```
+require 'ramparts'
 ```
 
 ## API
