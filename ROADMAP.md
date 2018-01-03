@@ -5,7 +5,7 @@
 - [ ] Implement Automatic Deployments
 - [x] Look into using hashes instead of array for testing infrastructure
 - [ ] Look into using custom rspec matchers
-- [ ] Travis badge for marketing
+- [x] Travis badge for marketing
 - [x] Use Ruby that's already installed on TravisCI
 - [ ] Use threads for true Map/Reduce. Look into [Celluloid](https://github.com/celluloid/celluloid)
 - [ ] Have check domain (for email matches) as an option (not only on :aggressive option) to reduce over matching
@@ -15,7 +15,7 @@
 - [ ] Implement URL functionality
 - [ ] Change URL to keywords list functionality
 - [ ] Robust-ify the overlapping interval scenario
-- [ ] Get setup on Code Climate once the repo goes open source
+- [x] Get setup on Code Climate once the repo goes open source
 - [ ] Think about using InchCI (inline docs) instead of README
 - [x] Creating a `spec_helper.rb` and use tools like SimpleCov, 
 - [ ] Look into using Shoulda matchers, and test randomization.
