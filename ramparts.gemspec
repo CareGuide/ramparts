@@ -9,6 +9,7 @@ Gem::Specification.new do |s|
   s.authors     = ['Brent Scheibelhut', 'CareGuide']
   s.email       = ['brent.scheibelhut@careguide.com', 'info@careguide.com']
   s.homepage    = 'https://github.com/CareGuide/ramparts'
+  s.metadata    = { "source_code_uri" => "https://github.com/CareGuide/ramparts" }
   s.license     = 'MIT'
   s.summary     = %q{Parses blocks of text to find phone numbers (including phonetic numbers), emails, and bad url}
   s.description = %q{Parses blocks of text to find phone numbers (including phonetic numbers), emails, and bad url. Useful for finding scammers who tend to try to post their phone number in messages.}
@@ -21,4 +22,6 @@ Gem::Specification.new do |s|
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
   s.executables   = `git ls-files -- bin/*`.split('\n').map{ |f| File.basename(f) }
   s.require_paths = ['lib']
+
+  s.required_ruby_version = '>= 2.1.0'
 end
