@@ -82,7 +82,7 @@ class PhoneParser
     Regexp.new(/(\()?(\d|#{BASE_MATCHING}){1}([^\w]*(\d|#{BASE_MATCHING}){1}[^\w]*){5,}(\d|#{BASE_MATCHING}){1}/)
 
   # The final regex used to match phone numbers for MR
-  MR_REGEX = Regexp.new(/(\-*\.?\d{1}\.?\-*){7,}/)
+  MR_REGEX = Regexp.new(/(\-*\.?\d{1}\.?\-?){7,}/)
 
   # Replacements used for phonetics for MR
   REPLACEMENTS = {
@@ -116,13 +116,8 @@ class PhoneParser
   # Parses the phone number for MR, uses a variety of options
   def parse_phone_number(text, options)
     text = text.delete(' ') if options.fetch(:remove_spaces, true)
-
     text = text.downcase.gsub(/#{REGEX_PHONETICS}/, REPLACEMENTS)
-
-    if options.fetch(:parse_leet, true)
-      text = text.gsub(/#{REGEX_LEET_SPEAK}/, LEET_REPLACEMENTS)
-    end
-
+    text = text.gsub(/#{REGEX_LEET_SPEAK}/, LEET_REPLACEMENTS) if options.fetch(:parse_leet, true)
     text.gsub(/[^\w]/, '-').gsub(/[a-z]/, '.')
   end
 

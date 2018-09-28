@@ -12,6 +12,11 @@ PHONE_TRUTHY_WITH_ANSWERS_AND_SPACES = [
 
 PHONE_TRUTHY_WITH_ANSWERS = [
   {
+    matches: [],
+    text: 'Резюме и референс письма нет Во всех семьях я работаю по устной рекомендации знакомых В семье в которой Бен и Джорджик я уже 7 лет Мальчикам 9 и 6 лет Второго забирали вместе с папой из госпиталя Работала у них иногда и по 12 часов Они живут в 5 ти минутах ходьбы от меня Детки подросли И',
+    filtered:  "Резюме и референс письма нет Во всех семьях я работаю по устной рекомендации знакомых В семье в которой Бен и Джорджик я уже 7 лет Мальчикам 9 и 6 лет Второго забирали вместе с папой из госпиталя Работала у них иногда и по 12 часов Они живут в 5 ти минутах ходьбы от меня Детки подросли И"
+  },
+  {
     matches: ["5.5.5.4.3.8.4.8.3.8"],
     text: "I need a babysitter and errand for my son textme direct on my number if you are interested 5.5.5.4.3.8.4.8.3.8",
     filtered:  "I need a babysitter and errand for my son textme direct on my number if you are interested #{INSERTABLE}"
