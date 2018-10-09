@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.3.1 (09/10/2018)
+- Fix long-running regex match
+
 ## 0.2.1 (14/12/2017)
 - Creating a `spec_helper.rb` and implement SimpleCov tool
 - Refactored test architecture to use hashes instead of arrays
